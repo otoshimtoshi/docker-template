@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("MYSQL_USERNAME", "root") %>
+  password: <%= ENV.fetch("MYSQL_PASSWORD", "password") %>
+  host: <%= ENV.fetch("MYSQL_HOST", "db") %>
+
+development:
+  <<: *default
+  database: docker-ruby-template
+
+test:
+  <<: *default
+  database: docker-ruby-template-test
+
+production:
+  <<: *default
+  database: docker-ruby-template-production
+  username: docker-ruby-template
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
